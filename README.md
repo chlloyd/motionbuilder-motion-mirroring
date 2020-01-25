@@ -13,7 +13,7 @@ The link to the dissertation is [here](url).
 ## Installation
 ### Clone
 
-`git clone https://github.com/chlloyd/.git`
+`git clone https://github.com/chlloyd/motionbuilder-motion-mirroring.git`
 
 ### Setup
 
