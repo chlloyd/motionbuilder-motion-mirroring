@@ -6,7 +6,7 @@ The link to the dissertation is [here](url).
 ---
 
 ## Prerequisite
- - Motionbuilder 2020
+ - Motionbuilder 2020 (python 2.7.11)
 
 ---
 
@@ -24,6 +24,9 @@ The link to the dissertation is [here](url).
 ---
 
 ## Running Tests
+### Windows
+
+`path_to_motionbuilder_install\motionbuilder.exe -batch path_to_tests_file`
 
 ---
 
