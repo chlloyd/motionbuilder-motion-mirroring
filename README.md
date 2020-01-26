@@ -6,7 +6,7 @@ The link to the dissertation is [here](url).
 ---
 
 ## Prerequisite
- - Motionbuilder
+ - Motionbuilder 2020
 
 ---
 
