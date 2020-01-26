@@ -1,4 +1,5 @@
 # motionbuilder-motion-mirroring
+A Motionbuilder Python Script to Mirror Motion Capture Data. 
 
 ## Introduction
 The link to the dissertation is [here](url). 
@@ -20,6 +21,9 @@ The link to the dissertation is [here](url).
 ---
 
 ## Features
+
+ - mctools - a package to simplify maniplication command within Motionbuilder.
+ - mirrormotiondata.py - mirroring motion capture using mctools and motionbuilder
 
 ---
 
