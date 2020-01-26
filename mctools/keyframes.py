@@ -3,7 +3,7 @@ keyframes.py
 """
 
 import json
-import pyfbxsdk
+import pyfbsdk
 
 
 def serialise_data():
