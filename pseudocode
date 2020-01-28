@@ -1,0 +1,12 @@
+## Basic Pseudocode for the project
+
+
+# UI decision to for the orientation the motion capture wants to be flip to
+Initial UI
+change_orientation = UI tickbox
+
+
+for frames in frame sequence:
+    for transform in joint:
+        flip on axis (change_orientation)
+
