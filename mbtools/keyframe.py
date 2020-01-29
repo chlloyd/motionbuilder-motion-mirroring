@@ -5,7 +5,7 @@ Utility functions for working with keyframe/fcurve data.
 
 import pyfbsdk
 
-from mctools import selection
+from mbtools import selection
 
 
 def get_single_keyframe_data():
