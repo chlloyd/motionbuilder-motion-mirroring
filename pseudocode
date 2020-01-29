@@ -8,5 +8,5 @@ change_orientation = UI tickbox
 
 for frames in frame sequence:
     for transform in joint:
-        flip on axis (change_orientation)
+        flip from hip joint (change_orientation)
 
