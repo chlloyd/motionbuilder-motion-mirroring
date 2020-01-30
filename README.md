@@ -20,6 +20,11 @@ The link to the dissertation is [here](url).
 
 ---
 
+## TODO List
+ - [ ] Run from command line ([Motionbuilder from command line](http://docs.autodesk.com/MB/2014/ENU/MotionBuilder-SDK-Documentation/index.html?url=files/GUID-989682FC-305F-4925-8B37-66490BC45C4C.htm,topicNumber=d30e3702))
+
+---
+
 ## Features
 
  - mctools - a package to simplify maniplication command within Motionbuilder.
