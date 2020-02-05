@@ -9,5 +9,7 @@ except ImportError:
         sys.path.append(MBTOOLS_PATH)
         import mbtools as mb
 
-reload(mb)
+reload(mb)  # only here for when the library is be edited
+
+# TODO: Add Comments on each line
 
