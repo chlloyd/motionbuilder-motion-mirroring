@@ -2,11 +2,27 @@
 
 
 # UI decision to for the orientation the motion capture wants to be flip to
+
+START
+
 Initial UI
 change_orientation = UI tickbox
 
 
-for frames in frame sequence:
-    for transform in joint:
-        flip from hip joint (change_orientation)
+FOR frames in frame sequence:
+    for rotation in joint:
+        flip from hip joint (change_orientation, rotation)
+        END FOR
+    END FOR
+
+
+FUNC flip from hip joint (orientation, rotation):
+    convert quaternion to rotation matrix
+    mirror matrix on orientation
+    convert rotation matrix to quaternion
+    return new quaternion
+    END FUNC
+
+
+END
 
