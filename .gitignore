@@ -1,5 +1,4 @@
 *.pyc
 *.json
 *.fbx
-
-scratchfiles/*.py
+scratchfiles/
