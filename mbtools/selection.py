@@ -32,5 +32,5 @@ def list_all_by_type(object_type):
     for lComponent in allNodes:
         # print lComponent.Name
         if lComponent and lComponent.ClassName() == object_type:
-            object_list.append(lComponent)
+            object_list.append(lComponent.LongName)
     return object_list
