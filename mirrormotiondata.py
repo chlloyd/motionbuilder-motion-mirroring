@@ -10,7 +10,7 @@ except ImportError:
         sys.path.append(MBTOOLS_PATH)
         import mbtools as mb
 
-        reload(mb)  # only here for when the library is be edited
+reload(mb)  # only here for when the library is be edited
 
 
 # TODO: Add Comments on each line
@@ -27,8 +27,8 @@ def mirror_keyframes():
             END FOR
         END FOR"""
     for frame in range(mb.time.first_frame(), mb.time.last_frame() + 1):
-        pass
-
+        for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
+            pass
 
 mirror_keyframes()
 
