@@ -28,7 +28,10 @@ def mirror_keyframes():
         END FOR"""
     for frame in range(mb.time.first_frame(), mb.time.last_frame() + 1):
         for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
-            pass
+            rotation = mb.properties.get_rotation(joint)
+            new_rotation = (rotation[0] * -1, rotation[1], rotation[2])
+            mb.properties.set_rotation(joint, new_rotation)
+
 
 mirror_keyframes()
 
