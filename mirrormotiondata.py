@@ -25,19 +25,21 @@ def mirror_keyframes():
             flip from hip joint (change_orientation, rotation)
             END FOR
         END FOR"""
-    data = {}
+    # data = {}
     # for frame in range(mb.time.first_frame(), mb.time.last_frame() + 1):
     # for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
     #     joint_rotation = mb.properties.get_rotation(joint)
     #     data[joint.Name] = {"rotation": {"x": joint_rotation[0], "y": joint_rotation[1], "z": joint_rotation[2]}}
 
-    #mb.readdata._write_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json", data)
+    # mb.readdata._write_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json", data)
 
     rotation_data = mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json")
     joint_list = []
     for joint, rotation in mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json").items():
-        print(joint)
-        print(rotation)
+        rotation = rotation["rotation"]
+        joint_mirror = mb.joint.joint_mirror(joint)
+        mb.properties.set_rotation(joint_mirror, rotation)
+
     #     joint_list.append(joint)
     #
     # for joint in joint_list:
