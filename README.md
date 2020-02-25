@@ -37,6 +37,9 @@ The link to the dissertation is [here](url).
 
 `path_to_motionbuilder_install\motionbuilder.exe -batch path_to_tests_file`
 
+### Linux
+`path_to_motionbuilder_install\motionbuilder -batch path_to_tests_file`
+
 ---
 
 ## Contributors
