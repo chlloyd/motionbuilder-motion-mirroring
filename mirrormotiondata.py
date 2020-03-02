@@ -25,31 +25,36 @@ def mirror_keyframes():
             flip from hip joint (change_orientation, rotation)
             END FOR
         END FOR"""
-    # data = {}
-    # for frame in range(mb.time.first_frame(), mb.time.last_frame() + 1):
-    # for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
-    #     joint_rotation = mb.properties.get_rotation(joint)
-    #     data[joint.Name] = {"rotation": {"x": joint_rotation[0], "y": joint_rotation[1], "z": joint_rotation[2]}}
+    """data = {}
+    #for frame in range(mb.time.first_frame(), mb.time.last_frame() + 1):
+    for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
+        joint_rotation = mb.properties.get_rotation(joint)
+        data[joint.Name] = {"rotation": {"x": joint_rotation[0], "y": joint_rotation[1], "z": joint_rotation[2]}}
 
-    # mb.readdata._write_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json", data)
+    mb.readdata._write_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json", data)
 
-    rotation_data = mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json")
+    # rotation_data =  mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json")"""
     joint_list = []
-    for joint, rotation in mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json").items():
-        rotation = rotation["rotation"]
-        joint_mirror = mb.joint.joint_mirror(joint)
-        mb.properties.set_rotation(joint_mirror, rotation)
+    # for joint, rotation in mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json").items():
+    #     rotation = (float(rotation["rotation"]["x"]), float(rotation["rotation"]["y"]), float(rotation["rotation"]["z"]))
+    #     joint_mirror = mb.joint.joint_mirror(joint)
+    #     mb.properties.set_rotation(joint_mirror, rotation)
 
     #     joint_list.append(joint)
     #
     # for joint in joint_list:
     #     print(rotation_data[joint])
 
-
-
-
-
-
+    rotation_data = mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json")
+    for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
+        joint_mirror = mb.joint.joint_mirror(joint.Name)
+        print(joint_mirror)
+        for mirror_joint, rotation in rotation_data.items():
+            if mirror_joint == joint_mirror:
+                rotation = rotation["rotation"]
+                rotation = (rotation["x"], rotation["y"], rotation["z"])
+                print(joint.Name, mirror_joint, rotation)
+                mb.properties.set_rotation(joint, rotation)
 
 
 
