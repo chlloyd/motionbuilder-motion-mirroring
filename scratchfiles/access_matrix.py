@@ -17,8 +17,10 @@ for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
     joint.GetMatrix(joint_rotation_matrix)
     print(type(joint_rotation_matrix))
     print(type(joint_rotation_matrix))
-    matrix_multiply = pyfbsdk.FBMatrixMult(joint_rotation_matrix, rotation_multiply)
+    # matrix_multiply = pyfbsdk.FBMatrixMult(joint_rotation_matrix, rotation_multiply)
+    matrix_multiply = pyfbsdk.FBMatrix(joint_rotation_matrix * rotation_multiply)
     print(matrix_multiply)
+    joint.setMatrix(matrix_multiply)
     break
 
     # joint_matrix = FBMatrix(a)
