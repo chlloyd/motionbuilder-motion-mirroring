@@ -51,4 +51,4 @@ The link to the dissertation is [here](url).
 ---
 
 ## Additional Links
-[Motionbuider Docs - Python Class List](https://help.autodesk.com/view/MOBPRO/2020/ENU/?guid=__py_ref_annotated_html&v=2019)
+[Motionbuider Docs - Python Class List](https://help.autodesk.com/view/MOBPRO/2020/ENU/?guid=__py_ref_group__pyfbsdk_html&v=2019)
