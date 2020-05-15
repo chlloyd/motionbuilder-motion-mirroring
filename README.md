@@ -2,7 +2,8 @@
 A Motionbuilder Python Script to Mirror Motion Capture Data. 
 
 ## Introduction
-The link to the dissertation is [here](url). 
+This script mirrors motion a joint system over an axis at the origin. 
+Create as part of the a dissertation linked [here](url). 
 
 ---
 
@@ -17,36 +18,29 @@ The link to the dissertation is [here](url).
 `git clone https://github.com/chlloyd/motionbuilder-motion-mirroring.git`
 
 ### Setup
+#### Run in Motionbuilder
 
----
+Method 1
+1. Open the script in the script editor. 
+2. Change last line to the correct reflecting axis and the joint systems group name. 
 
-## TODO List
- - [ ] Run from command line ([Motionbuilder from command line](https://help.autodesk.com/view/MOBPRO/2020/ENU/?guid=__files_GUID_989682FC_305F_4925_8B37_66490BC45C4C_htm))
+Method 2
+1. Edit the last line to the correct reflecting axis and the joint systems group name.
+2. Drag in the scene
+
 
 ---
 
 ## Features
 
- - mbtools - a package to simplify manipulation command within Motionbuilder.
- - mirrormotiondata.py - mirroring motion capture using mbtools and motionbuilder
+ - mirrormotiondata.py - mirroring motion capture in motionbuilder
 
 ---
 
-## Running Tests
-### Windows
-
-`path_to_motionbuilder_install\motionbuilder.exe -batch path_to_tests_file`
-
-### Linux
-`path_to_motionbuilder_install\motionbuilder -batch path_to_tests_file`
-
----
 
 ## Contributors
 
----
-
-## Known Issues
+[chlloyd](www.github.com/chlloyd)
 
 ---
 
