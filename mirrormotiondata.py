@@ -1,81 +1,127 @@
-import sys
-import os
-import json
-import pyfbsdk
-
-try:
-    import mbtools as mb
-except ImportError:
-    MBTOOLS_PATH = os.path.dirname(os.path.realpath(__file__))
-    if MBTOOLS_PATH not in sys.path:
-        sys.path.append(MBTOOLS_PATH)
-        import mbtools as mb
+from pyfbsdk import FBComponentList, FBFindObjectsByName, FBModelSkeleton, FBFindModelByLabelName
 
 
-# TODO: Add Comments on each line
+def joint_mirror(joint_to_mirror):
+    if "Left" in joint_to_mirror:
+        return joint_to_mirror.replace("Left", "Right")
+    elif "Right" in joint_to_mirror:
+        return joint_to_mirror.replace("Right", "Left")
+    elif "L_" in joint_to_mirror:
+        return joint_to_mirror.replace("L_", "R_")
+    elif "R_" in joint_to_mirror:
+        return joint_to_mirror.replace("R_", "L_")
+    elif "_L" in joint_to_mirror:
+        return joint_to_mirror.replace("_L", "_R")
+    elif "_R" in joint_to_mirror:
+        return joint_to_mirror.replace("_R", "_L")
+    elif "L" in joint_to_mirror and "Lower" not in joint_to_mirror:
+        return joint_to_mirror.replace("L", "R")
+    elif "R" in joint_to_mirror:
+        return joint_to_mirror.replace("R", "L")
+    else:
+        return None
 
 
-def BuildUI():
-    pass
+def select_by_namespace(namespace):
+    foundComponents = FBComponentList()
+    includeNamespace = True
+    modelsOnly = False
+    FBFindObjectsByName(namespace, foundComponents, includeNamespace, modelsOnly)
+    components_list = []
+    for component in foundComponents:
+        components_list.append(component)
+    return components_list
 
 
-def mirror_keyframes():
-    """FOR frames in frame sequence:
-        for rotation in joint:
-            flip from hip joint (change_orientation, rotation)
-            END FOR
-        END FOR"""
-    """data = {}
-    #for frame in range(mb.time.first_frame(), mb.time.last_frame() + 1):
-    for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
-        joint_rotation = mb.properties.get_rotation(joint)
-        data[joint.Name] = {"rotation": {"x": joint_rotation[0], "y": joint_rotation[1], "z": joint_rotation[2]}}
+def mirror(plane, skeleton_namespace):
+    if plane == "XY":
+        negation = {"rotation": (1, -1, -1), "translation": (-1, 1, 1)}  # negate rotation YZ, translation X
+    elif plane == "YZ":
+        negation = {"rotation": (-1, 1, -1), "translation": (1, -1, 1)}  # negate rotation XZ, translation Y
+    elif plane == "XZ":
+        negation = {"rotation": (-1, -1, 1), "translation": (1, 1, -1)}  # negate rotation XY, translation Z
 
-    mb.readdata._write_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json", data)
+    skeleton = select_by_namespace(skeleton_namespace)
+    rotation_data = {}
+    translation_data = {}
+    for joint in skeleton:
+        if type(joint) == FBModelSkeleton:
+            try:
+                animRotateNode = joint.Rotation.GetAnimationNode()
 
-    # rotation_data =  mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json")"""
-    joint_list = []
-    # for joint, rotation in mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json").items():
-    #     rotation = (float(rotation["rotation"]["x"]), float(rotation["rotation"]["y"]), float(rotation["rotation"]["z"]))
-    #     joint_mirror = mb.joint.joint_mirror(joint)
-    #     mb.properties.set_rotation(joint_mirror, rotation)
+                xOrentationList = []
+                fcurveRotateX = animRotateNode.Nodes[0].FCurve.Keys
+                for curve in fcurveRotateX:
+                    xOrentationList.append((curve.Time, curve.Value))
 
-    #     joint_list.append(joint)
-    #
-    # for joint in joint_list:
-    #     print(rotation_data[joint])
+                yOrentationList = []
+                fcurveRotateY = animRotateNode.Nodes[1].FCurve.Keys
+                for curve in fcurveRotateY:
+                    yOrentationList.append((curve.Time, curve.Value))
 
-    rotation_data = mb.readdata._read_json_file("G:\\Programming Projects\\motionbuilder-motion-mirroring\\test_json.json")
-    for joint in mb.selection.list_all_by_type("FBModelSkeleton"):
-        joint_mirror = mb.joint.joint_mirror(joint.Name)
-        print(joint_mirror)
-        for mirror_joint, rotation in rotation_data.items():
-            if mirror_joint == joint_mirror:
-                rotation = rotation["rotation"]
-                rotation = (rotation["x"], rotation["y"], rotation["z"])
-                print(joint.Name, mirror_joint, rotation)
-                mb.properties.set_rotation(joint, rotation)
+                zOrentationList = []
+                fcurveRotateZ = animRotateNode.Nodes[2].FCurve.Keys
+                for curve in fcurveRotateZ:
+                    zOrentationList.append((curve.Time, curve.Value))
 
+                rotation_data[joint] = {"x": xOrentationList, "y": yOrentationList, "z": zOrentationList}
 
+            except AttributeError:
+                pass
 
+            try:
+                animTranslateNode = joint.Translation.GetAnimationNode()
 
-        # rotation_node = joint.Rotation.GetAnimationNode()
-        # if rotation_node == None:
-        #     pass
-        # else:
-        #     print(rotation_node.Nodes[0].FCurve.Name)
-        #     print(rotation_node.Nodes[1].FCurve.Name)
-        #     print(rotation_node.Nodes[2].FCurve.Name)
-        # rotation = mb.properties.get_rotation(joint)
-        # new_rotation = (rotation[0] * -1, rotation[1], rotation[2])
-        # mb.properties.set_rotation(joint, new_rotation)
+                xOrentationList = []
+                fcurveTranslateX = animTranslateNode.Nodes[0].FCurve.Keys
+                for curve in fcurveTranslateX:
+                    xOrentationList.append((curve.Time, curve.Value))
 
+                yOrentationList = []
+                fcurveTranslateY = animTranslateNode.Nodes[1].FCurve.Keys
+                for curve in fcurveTranslateY:
+                    yOrentationList.append((curve.Time, curve.Value))
 
-mirror_keyframes()
+                zOrentationList = []
+                fcurveTranslateZ = animTranslateNode.Nodes[2].FCurve.Keys
+                for curve in fcurveTranslateZ:
+                    zOrentationList.append((curve.Time, curve.Value))
 
-"""FUNC flip from hip joint (orientation, rotation):
-    convert quaternion to rotation matrix
-    mirror matrix on orientation
-    convert rotation matrix to quaternion
-    return new quaternion
-    END FUNC"""
+                translation_data[joint] = {"x": xOrentationList, "y": yOrentationList, "z": zOrentationList}
+
+            except AttributeError:
+                pass
+
+    for joint, data in rotation_data.items():
+        if joint_mirror(joint.Name) is None:
+            selected_joint = FBFindModelByLabelName(joint.LongName)
+        else:
+            selected_joint = FBFindModelByLabelName(joint_mirror(joint.LongName))
+
+        animNode = selected_joint.Rotation.GetAnimationNode()
+        fcurve = animNode.Nodes[0].FCurve
+        for xValue in data["x"]:
+            fcurve.KeyAdd(xValue[0], negation["rotation"][0] * xValue[1])
+
+        fcurve = animNode.Nodes[1].FCurve
+        for yValue in data["y"]:
+            fcurve.KeyAdd(yValue[0], negation["rotation"][1] * yValue[1])
+
+        fcurve = animNode.Nodes[2].FCurve
+        for zValue in data["z"]:
+            fcurve.KeyAdd(zValue[0], negation["rotation"][2] * zValue[1])
+
+    for joint, data in translation_data.items():
+
+        animNode = joint.Translation.GetAnimationNode()
+        fcurve = animNode.Nodes[0].FCurve
+        for xValue in data["x"]:
+            fcurve.KeyAdd(xValue[0], negation["translation"][0] * xValue[1])
+        fcurve = animNode.Nodes[1].FCurve
+        for yValue in data["y"]:
+            fcurve.KeyAdd(yValue[0], negation["translation"][1] * yValue[1])
+        fcurve = animNode.Nodes[2].FCurve
+        for zValue in data["z"]:
+            fcurve.KeyAdd(zValue[0], negation["translation"][2] * zValue[1])
+
+# mirror("XY", "BVH:*")
