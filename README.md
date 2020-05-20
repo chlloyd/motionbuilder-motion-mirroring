@@ -40,7 +40,7 @@ Method 2
 
 ## Contributors
 
-[chlloyd](www.github.com/chlloyd) -
+[chlloyd](https://www.github.com/chlloyd)
 
 ---
 
