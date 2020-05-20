@@ -1,28 +1,36 @@
-## Basic Pseudocode for the project
+## Basic Pseudo code for the final project
 
 
-# UI decision to for the orientation the motion capture wants to be flip to
+GET mirroring axis
+GET namespace
 
-START
+FOR joint in namespace:
+    FOR frames in frame sequence:
+        SAVE rotation data
+        SAVE translation data
+     END FOR
+END FOR
 
-Initial UI
-change_orientation = UI tickbox
+FOR joint in rotation data:
+    new_joint =  joint_mirrored(joint)  ## (leftLeg -> rightLeg, rightLeg -> leftLeg)
+
+    IF mirrored joint == None:
+        new_joint == joint
+    END IF
+
+    SET mirrored joint to rotation data * mirroring axis
+END FOR
+
+FOR joint in rotation:
+    SET mirrored joint to translation data * mirroring axis
+END FOR
 
 
-FOR frames in frame sequence:
-    for rotation in joint:
-        flip from hip joint (change_orientation, rotation)
-        END FOR
-    END FOR
-
-
-FUNC flip from hip joint (orientation, rotation):
-    convert quaternion to rotation matrix
-    mirror matrix on orientation
-    convert rotation matrix to quaternion
-    return new quaternion
-    END FUNC
-
-
-END
-
+FUNCTION mirror joint():
+    left -> right
+    right -> left
+    l_ - > r_
+    r_ -> l_
+    l - > r
+    r -> l
+END FUNCTION
