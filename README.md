@@ -1,8 +1,8 @@
 # motionbuilder-motion-mirroring
-A Motionbuilder Python Script to Mirror Motion Capture Data. 
+A Motionbuilder Python script to mirror motion capture data. 
 
 ## Introduction
-This script mirrors motion a joint system over an axis at the origin. 
+This script mirrors joint system with keyframe data over an axis at the origin. 
 Create as part of the a dissertation linked [here](url). 
 
 ---
@@ -40,7 +40,7 @@ Method 2
 
 ## Contributors
 
-[chlloyd](www.github.com/chlloyd)
+[chlloyd](https://www.github.com/chlloyd)
 
 ---
 
