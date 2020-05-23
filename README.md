@@ -37,6 +37,9 @@ Method 2
 
 ---
 
+## Sample Motion Capture Files
+Example Motion Capture testing file in FBX format are in the testing fbx files folder.
+
 
 ## Contributors
 
