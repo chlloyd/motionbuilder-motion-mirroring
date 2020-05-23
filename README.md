@@ -8,7 +8,7 @@ Create as part of the a dissertation linked [here](url).
 ---
 
 ## Prerequisite
- - Motionbuilder 2020 (python 2.7.11)
+ - Motionbuilder 2020 (python 2.7.11) - Should work with Earlier Versions
 
 ---
 
