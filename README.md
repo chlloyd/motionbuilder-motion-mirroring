@@ -3,7 +3,8 @@ A Motionbuilder Python script to mirror motion capture data.
 
 ## Introduction
 This script mirrors joint system with keyframe data over an axis at the origin. 
-Create as part of the a dissertation linked [here](url). 
+Create as part of the a dissertation linked [here](URL). 
+[Video Demo](https://www.youtube.com/watch?v=SUPAhyXEN-s&t)
 
 ---
 
